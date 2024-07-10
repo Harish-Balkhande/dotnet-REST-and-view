@@ -1,0 +1,50 @@
+﻿@model IEnumerable<ModuleWebApp.Models.Students>
+
+<form asp-controller="Students" asp-action="GetStudentById" method="post">
+    <input type="number" name="id" placeholder="Enter student ID" />
+    <input type="submit" value="Search">
+</form>
+<br />
+<form asp-controller="Students" asp-action="SearchByStatus" method="post">
+    <label for="dropdownSelection">Filter:</label>
+    <select id="dropdownSelection" name="status">
+        <option>select</option>
+        <option value="Active">Active</option>
+        <option value="inactive">Inactive</option>
+    </select>
+    <input type="submit" value="Find">
+</form>
+<hr />
+
+<h3>Students List</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Name</th>
+            <th>Mobile No.</th>
+            <th>Address</th>
+            <th>Admission Date</th>
+            <th>Fees</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>@student.id</td>
+                <td>@student.email</td>
+                <td>@student.name</td>
+                <td>@student.mobile_no</td>
+                <td>@student.address</td>
+                <td>@student.admission_date</td>
+                <td>@student.fees</td>
+                <td>@student.status</td>
+                <td><a href="/Students/UpdateStudentDetails" class="btn btn-primary text-decoration-none p-2" >Update</a></td>
+                <td><a href="/Students/DeleteStudent?id=@student.id" class="btn btn-danger text-decoration-none p-2">Delete</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
